@@ -58,6 +58,14 @@ contract Twitter {
         emit TweetLiked(msg.sender, author, id, tweets[author][id].likes);
     }
 
+    function getTotalLikes(address _user) public view returns (uint){
+        uint256 totalLikes = 0;
+        for(uint8 i=0; i<tweets[_user].length; i++){
+            totalLikes += tweets[_user][i].likes;
+        }
+        return totalLikes;
+    }
+
     function changeTweetLength(uint16 newTweetLength) public onlyOwner {
         MAX_TWEET_LENGTH = newTweetLength;
     }
